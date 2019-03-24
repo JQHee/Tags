@@ -22,7 +22,16 @@ class BFTagsView: UIView {
             reload()
         }
     }
-    private lazy var style: BFTagsStyle = BFTagsStyle()
+
+    var _style: BFTagsStyle = BFTagsStyle()
+    var style: BFTagsStyle! {
+        set {
+            _style = newValue
+        }
+        get {
+            return _style
+        }
+    }
     private var height: CGFloat = 0
 
     weak var delegate: BFTagsViewDelegate?
@@ -41,12 +50,6 @@ class BFTagsView: UIView {
     }
 
     // MARK: - Public methods
-    func show(tags: [BFTagsModel], style: BFTagsStyle) {
-        self.tags = tags
-        self.style = style
-        reload()
-    }
-
     func reload() {
         reload(tags: self.tags)
     }
@@ -61,8 +64,8 @@ class BFTagsView: UIView {
         subviews.forEach { (tempView) in
             tempView.removeFromSuperview()
         }
-        var startX: CGFloat = style.margin.left
-        var startY: CGFloat = style.margin.top
+        var startX: CGFloat = style.padding.left
+        var startY: CGFloat = style.padding.top
         var lastWidth: CGFloat = 0
         var tempSpace: CGFloat  = 0
         for (_, value) in tags.enumerated() {
@@ -94,7 +97,7 @@ class BFTagsView: UIView {
             if style.column != 0 {
                 // average
                 let totalSpace = CGFloat(style.column - 1) * style.itemHSpace
-                let itemWidth = (pWidth - style.margin.left - style.margin.right - totalSpace) / CGFloat(style.column)
+                let itemWidth = (pWidth - style.padding.left - style.padding.right - totalSpace) / CGFloat(style.column)
                 width = itemWidth
 
             } else {
@@ -103,14 +106,14 @@ class BFTagsView: UIView {
                 } else {
                     // Father is beyond control
                     if width >= pWidth {
-                        width = pWidth - style.margin.left - style.margin.right
+                        width = pWidth - style.padding.left - style.padding.right
                     }
                 }
             }
 
             // Need to wrap
-            if (CGFloat)(startX + width + style.margin.right) > pWidth {
-                startX = style.margin.left
+            if (CGFloat)(startX + width + style.padding.right) > pWidth {
+                startX = style.padding.left
                 startY += style.itemVSpace + style.itemHeight
             }
             tempSpace = style.itemHSpace
@@ -119,7 +122,7 @@ class BFTagsView: UIView {
             addSubview(label)
             startX = (CGFloat)(startX + lastWidth + tempSpace)
         }
-        height = startY + style.margin.bottom + style.itemHeight
+        height = startY + style.padding.bottom + style.itemHeight
         if let _ = itemHeightCallBack {
             itemHeightCallBack!(getHeight())
         }

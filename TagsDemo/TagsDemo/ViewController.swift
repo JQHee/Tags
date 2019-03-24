@@ -42,7 +42,8 @@ class ViewController: UIViewController {
             tagView.frame.size.height = height
         }
 
-        tagView1.show(tags: tags1, style: style1)
+        tagView1.style = style1
+        tagView1.tags = tags1
         tagView1.itemHeightCallBack = { [weak self](height) in
             guard let `self` = self else {return}
             self.tagView1HeightCons.constant = height
@@ -60,7 +61,8 @@ class ViewController: UIViewController {
         let style2 = BFTagsStyle()
         style2.column = 4
         tagView2.delegate = self
-        tagView2.show(tags: tags2, style: style2)
+        tagView2.style = style2
+        tagView2.tags = tags2
         tagView2.itemHeightCallBack = { [weak self](height) in
             guard let `self` = self else {return}
             self.tagView2HeightCons.constant = height
