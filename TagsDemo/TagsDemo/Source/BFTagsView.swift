@@ -25,37 +25,50 @@ class BFTagsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        height = frame.size.height
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         reload()
     }
 
     // MARK: - Public methods
-    func show(tags: [BFTagsModel], style: BFTagsStyle = BFTagsStyle()) {
+    func show(tags: [BFTagsModel], style: BFTagsStyle) {
         self.tags = tags
         self.style = style
+        reload()
+    }
+
+    func show(tags: [BFTagsModel]) {
+        self.tags = tags
         reload()
     }
 
     func reload() {
         reload(tags: self.tags)
     }
+
+
+    func getHeight() -> CGFloat {
+        return height
+    }
+
+    // MARK: - Private methods
     private func reload(tags: [BFTagsModel]) {
         subviews.forEach { (tempView) in
             tempView.removeFromSuperview()
         }
-        var startX: CGFloat = style.leftSpace
-        var startY: CGFloat = style.topSpace
+        var startX: CGFloat = style.margin.left
+        var startY: CGFloat = style.margin.top
         var lastWidth: CGFloat = 0
         var tempSpace: CGFloat  = 0
         for (_, value) in tags.enumerated() {
             let label = BFTagsLabel()
+            // label.lineBreakMode = .byCharWrapping
             label.textAlignment = .center
             label.isUserInteractionEnabled = true
             label.insets = value.insets
@@ -82,7 +95,7 @@ class BFTagsView: UIView {
             if style.column != 0 {
                 // average
                 let totalSpace = CGFloat(style.column - 1) * style.itemHSpace
-                let itemWidth = (pWidth - style.leftSpace - style.rightSpace - totalSpace) / CGFloat(style.column)
+                let itemWidth = (pWidth - style.margin.left - style.margin.right - totalSpace) / CGFloat(style.column)
                 width = itemWidth
 
             } else {
@@ -91,35 +104,35 @@ class BFTagsView: UIView {
                 } else {
                     // Father is beyond control
                     if width >= pWidth {
-                        width = pWidth - style.leftSpace - style.rightSpace
+                        width = pWidth - style.margin.left - style.margin.right
                     }
                 }
             }
-            // Need to wrap
-            if (CGFloat)(startX + width + style.rightSpace) > pWidth {
-                startX = style.leftSpace
-                startY += style.itemVSpace + style.itemHeight
-                tempSpace = style.itemHSpace
-                lastWidth = width
 
-            } else {
-                lastWidth = width
-                tempSpace = style.itemHSpace
+            // Need to wrap
+            if (CGFloat)(startX + width + style.margin.right) > pWidth {
+                startX = style.margin.left
+                startY += style.itemVSpace + style.itemHeight
             }
+            tempSpace = style.itemHSpace
+            lastWidth = width
             label.frame = CGRect.init(x: startX, y: startY, width: width, height: style.itemHeight)
             addSubview(label)
             startX = (CGFloat)(startX + lastWidth + tempSpace)
         }
-        height = startY + style.bottomSpace + style.itemHeight
+        height = startY + style.margin.bottom + style.itemHeight
         if let _ = itemHeightCallBack {
             itemHeightCallBack!(getHeight())
         }
     }
 
-    func getHeight() -> CGFloat {
-        return height
+    private func widthForComment(text: String, font: UIFont, height: CGFloat = 20) -> CGFloat {
+        let font = font
+        let rect = NSString(string: text).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: height), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(rect.width)
     }
 
+    // MARK: - Event reponse
     @objc
     func itemTapAction(tapGes: UIGestureRecognizer) {
         guard let label = tapGes.view as? BFTagsLabel else {
@@ -128,12 +141,6 @@ class BFTagsView: UIView {
         if let _ = delegate {
             delegate?.itemClick(tagsView: self, model: label.model)
         }
-    }
-
-    private func widthForComment(text: String, font: UIFont, height: CGFloat = 20) -> CGFloat {
-        let font = font
-        let rect = NSString(string: text).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: height), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        return ceil(rect.width)
     }
 
 }

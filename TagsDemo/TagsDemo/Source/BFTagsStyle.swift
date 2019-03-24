@@ -16,10 +16,7 @@ class BFTagsStyle {
     var font: UIFont = UIFont.systemFont(ofSize: 12)
 
     // margin
-    var leftSpace: CGFloat = 0
-    var topSpace: CGFloat = 0
-    var bottomSpace: CGFloat = 0
-    var rightSpace: CGFloat = 0
+    var margin: UIEdgeInsets = UIEdgeInsets.init(top: 5, left: 5, bottom: 5, right: 5)
 
     var itemHeight: CGFloat = 16.0
 
