@@ -17,7 +17,11 @@ class BFTagsView: UIView {
 
     var itemHeightCallBack:((_ heigt: CGFloat) -> ())?
 
-    private lazy var tags: [BFTagsModel] = []
+    var tags: [BFTagsModel] = [] {
+        didSet {
+            reload()
+        }
+    }
     private lazy var style: BFTagsStyle = BFTagsStyle()
     private var height: CGFloat = 0
 
@@ -40,11 +44,6 @@ class BFTagsView: UIView {
     func show(tags: [BFTagsModel], style: BFTagsStyle) {
         self.tags = tags
         self.style = style
-        reload()
-    }
-
-    func show(tags: [BFTagsModel]) {
-        self.tags = tags
         reload()
     }
 

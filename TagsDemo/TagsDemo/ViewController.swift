@@ -33,6 +33,15 @@ class ViewController: UIViewController {
         ]
         let style1 = BFTagsStyle()
 
+       let tagView = BFTagsView.init(frame: CGRect.init(x: 20, y: 300, width: UIScreen.main.bounds.size.width - 40, height: 80))
+        tagView.tags = tags1
+        tagView.delegate = self
+        view.addSubview(tagView)
+        tagView.itemHeightCallBack = { [weak self](height) in
+            guard let `self` = self else {return}
+            tagView.frame.size.height = height
+        }
+
         tagView1.show(tags: tags1, style: style1)
         tagView1.itemHeightCallBack = { [weak self](height) in
             guard let `self` = self else {return}

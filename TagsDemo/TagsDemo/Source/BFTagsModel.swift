@@ -22,7 +22,7 @@ class BFTagsModel {
 
     var selectBothColor: UIColor = UIColor.clear
     var selectTextColor: UIColor = UIColor.white
-    var selectBackgroundColor: UIColor = UIColor.clear
+    var selectBackgroundColor: UIColor = UIColor.red
 
     var insets: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 3, bottom: 0, right: 3)
 
