@@ -53,12 +53,7 @@ class BFTagsView: UIView {
     func reload() {
         reload(tags: self.tags)
     }
-
-
-    private func getHeight() -> CGFloat {
-        return height
-    }
-
+    
     // MARK: - Private methods
     private func reload(tags: [BFTagsModel]) {
         subviews.forEach { (tempView) in
@@ -69,29 +64,33 @@ class BFTagsView: UIView {
         var lastWidth: CGFloat = 0
         var tempSpace: CGFloat  = 0
         for (_, value) in tags.enumerated() {
-            let label = BFTagsLabel()
-            // label.lineBreakMode = .byCharWrapping
-            label.textAlignment = .center
-            label.isUserInteractionEnabled = true
-            label.insets = value.insets
-            label.font = style.font
-            label.layer.masksToBounds = true
-            label.layer.cornerRadius = value.corners
+            let button = BFTagsButton()
+            button.titleLabel?.lineBreakMode = value.lineBreakMode
+            button.titleLabel?.textAlignment = value.textAlignment
+            button.titleLabel?.numberOfLines = value.numberOfLines
+            button.isUserInteractionEnabled = true
+            button.insets = value.insets
+            button.titleLabel?.font = style.font
+            button.layer.masksToBounds = true
+            button.layer.cornerRadius = value.corners
 
             if value.is_select {
-                label.textColor = value.selectTextColor
-                label.backgroundColor = value.selectBackgroundColor
-                label.layer.borderColor = value.selectBothColor.cgColor
+                button.setTitleColor(value.selectTextColor, for: .normal)
+                button.backgroundColor = value.selectBackgroundColor
+                button.layer.borderColor = value.selectBothColor.cgColor
+                button.setImage(value.selectImage, for: .normal)
+                button.setBackgroundImage(value.selectBackgroudImage, for: .normal)
             } else {
-                label.textColor = value.textColor
-                label.backgroundColor = value.backgroundColor
-                label.layer.borderColor = value.bothColor.cgColor
+                button.setTitleColor(value.textColor, for: .normal)
+                button.backgroundColor = value.backgroundColor
+                button.layer.borderColor = value.bothColor.cgColor
+                button.setBackgroundImage(value.backgroudImage, for: .normal)
+                button.setImage(value.image, for: .normal)
             }
-            label.text = value.name
-            label.model = value
+            button.setTitle(value.name, for: .normal)
+            button.model = value
             // tag action
-            let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(itemTapAction(tapGes:)))
-            label.addGestureRecognizer(tapGes)
+            button.addTarget(self, action: #selector(itemClick(btn:)), for: .touchUpInside)
             var width = widthForComment(text: value.name, font: style.font, height: style.itemHeight) + value.insets.left + value.insets.right
             let pWidth = frame.size.width
             if style.column != 0 {
@@ -118,14 +117,27 @@ class BFTagsView: UIView {
             }
             tempSpace = style.itemHSpace
             lastWidth = width
-            label.frame = CGRect.init(x: startX, y: startY, width: width, height: style.itemHeight)
-            addSubview(label)
+            button.frame = CGRect.init(x: startX, y: startY, width: width, height: style.itemHeight)
+            addSubview(button)
+            if value.is_select {
+                if let _ = value.selectRightBottomIcon {
+                    let iconImageView = UIImageView.init(image: value.selectRightBottomIcon)
+                    iconImageView.frame = CGRect.init(x: button.frame.width - value.rightIconSize.width - value.bothWidth, y: button.frame.height - value.rightIconSize.height - value.bothWidth, width: value.rightIconSize.width, height: value.rightIconSize.height)
+                    button.addSubview(iconImageView)
+                }
+            } else {
+                if let _ = value.rightBottomIcon {
+                    let iconImageView = UIImageView.init(image: value.rightBottomIcon)
+                    iconImageView.frame = CGRect.init(x: button.frame.width - value.rightIconSize.width - value.bothWidth, y: button.frame.height - value.rightIconSize.height - value.bothWidth, width: value.rightIconSize.width, height: value.rightIconSize.height)
+                    button.addSubview(iconImageView)
+                }
+            }
             startX = (CGFloat)(startX + lastWidth + tempSpace)
-            height = label.frame.origin.y + label.frame.size.height + style.padding.bottom
+            height = button.frame.origin.y + button.frame.size.height + style.padding.bottom
         }
         // height = startY + style.padding.bottom + style.itemHeight
         if let _ = itemHeightCallBack {
-            itemHeightCallBack!(getHeight())
+            itemHeightCallBack!(height)
         }
     }
 
@@ -137,12 +149,9 @@ class BFTagsView: UIView {
 
     // MARK: - Event reponse
     @objc
-    func itemTapAction(tapGes: UIGestureRecognizer) {
-        guard let label = tapGes.view as? BFTagsLabel else {
-            return
-        }
+    func itemClick(btn: BFTagsButton) {
         if let _ = delegate {
-            delegate?.itemClick(tagsView: self, model: label.model)
+            delegate?.itemClick(tagsView: self, model: btn.model)
         }
     }
 

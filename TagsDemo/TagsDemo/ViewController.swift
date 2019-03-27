@@ -50,7 +50,11 @@ class ViewController: UIViewController {
         }
 
         let model = BFTagsModel.init(name: "测试点击", id: "1")
-        model.selectBackgroundColor = .red
+        // model.selectBackgroundColor = .red
+        model.image = UIImage.init(named: "Me-daikan-icon-mark-not edit")
+        model.selectImage = UIImage.init(named: "Me-daikan-icon-mark-not edit")
+        // model.selectBackgroudImage = UIImage.init(named: "Me-daikan-label-selected")
+        model.selectRightBottomIcon = UIImage.init(named: "Me-daikan-label-selected")
         let tags2: [BFTagsModel] = [
             model,
             BFTagsModel(name: "1233"),

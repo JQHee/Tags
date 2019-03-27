@@ -19,10 +19,22 @@ class BFTagsModel {
     var bothColor: UIColor = UIColor.clear
     var textColor: UIColor = UIColor.white
     var backgroundColor: UIColor = UIColor.orange
+    var image: UIImage?
+    var backgroudImage: UIImage?
+    var rightBottomIcon: UIImage?
 
     var selectBothColor: UIColor = UIColor.clear
     var selectTextColor: UIColor = UIColor.white
-    var selectBackgroundColor: UIColor = UIColor.red
+    var selectBackgroundColor: UIColor = UIColor.clear
+    var selectImage: UIImage?
+    var selectBackgroudImage: UIImage?
+    var selectRightBottomIcon: UIImage?
+    
+    var numberOfLines: Int = 1
+    var lineBreakMode: NSLineBreakMode = .byCharWrapping
+    var textAlignment: NSTextAlignment = .center
+    
+    var rightIconSize = CGSize.init(width: 16, height: 16)
 
     var insets: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 3, bottom: 0, right: 3)
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E4E4523224B488A009C264B /* BFTagsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E4522224B488A009C264B /* BFTagsButton.swift */; };
 		66163032224784E20040B922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66163031224784E20040B922 /* AppDelegate.swift */; };
 		66163034224784E20040B922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66163033224784E20040B922 /* ViewController.swift */; };
 		66163037224784E20040B922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66163035224784E20040B922 /* Main.storyboard */; };
@@ -17,7 +18,6 @@
 		66163061224785260040B922 /* BFTagsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66163060224785260040B922 /* BFTagsStyle.swift */; };
 		661630632247854F0040B922 /* BFTagsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661630622247854F0040B922 /* BFTagsModel.swift */; };
 		66163065224785640040B922 /* BFTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66163064224785640040B922 /* BFTagsView.swift */; };
-		66163067224787D10040B922 /* BFTagsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66163066224787D10040B922 /* BFTagsLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E4E4522224B488A009C264B /* BFTagsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFTagsButton.swift; sourceTree = "<group>"; };
 		6616302E224784E20040B922 /* TagsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66163031224784E20040B922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66163033224784E20040B922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		66163060224785260040B922 /* BFTagsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFTagsStyle.swift; sourceTree = "<group>"; };
 		661630622247854F0040B922 /* BFTagsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFTagsModel.swift; sourceTree = "<group>"; };
 		66163064224785640040B922 /* BFTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFTagsView.swift; sourceTree = "<group>"; };
-		66163066224787D10040B922 /* BFTagsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFTagsLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +140,7 @@
 				66163060224785260040B922 /* BFTagsStyle.swift */,
 				661630622247854F0040B922 /* BFTagsModel.swift */,
 				66163064224785640040B922 /* BFTagsView.swift */,
-				66163066224787D10040B922 /* BFTagsLabel.swift */,
+				5E4E4522224B488A009C264B /* BFTagsButton.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -279,8 +279,8 @@
 				661630632247854F0040B922 /* BFTagsModel.swift in Sources */,
 				66163034224784E20040B922 /* ViewController.swift in Sources */,
 				66163065224785640040B922 /* BFTagsView.swift in Sources */,
-				66163067224787D10040B922 /* BFTagsLabel.swift in Sources */,
 				66163061224785260040B922 /* BFTagsStyle.swift in Sources */,
+				5E4E4523224B488A009C264B /* BFTagsButton.swift in Sources */,
 				66163032224784E20040B922 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SYZGGW5E8S;
 				INFOPLIST_FILE = TagsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -474,6 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SYZGGW5E8S;
 				INFOPLIST_FILE = TagsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
