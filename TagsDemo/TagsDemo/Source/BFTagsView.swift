@@ -121,8 +121,9 @@ class BFTagsView: UIView {
             label.frame = CGRect.init(x: startX, y: startY, width: width, height: style.itemHeight)
             addSubview(label)
             startX = (CGFloat)(startX + lastWidth + tempSpace)
+            height = label.frame.origin.y + label.frame.size.height + style.padding.bottom
         }
-        height = startY + style.padding.bottom + style.itemHeight
+        // height = startY + style.padding.bottom + style.itemHeight
         if let _ = itemHeightCallBack {
             itemHeightCallBack!(getHeight())
         }
