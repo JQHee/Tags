@@ -55,7 +55,7 @@ class BFTagsView: UIView {
     }
 
 
-    func getHeight() -> CGFloat {
+    private func getHeight() -> CGFloat {
         return height
     }
 
