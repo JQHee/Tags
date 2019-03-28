@@ -73,17 +73,18 @@ class BFTagsView: UIView {
             button.titleLabel?.font = style.font
             button.layer.masksToBounds = true
             button.layer.cornerRadius = value.corners
-
+            button.layer.borderWidth = value.borderWidth
+            
             if value.is_select {
                 button.setTitleColor(value.selectTextColor, for: .normal)
                 button.backgroundColor = value.selectBackgroundColor
-                button.layer.borderColor = value.selectBothColor.cgColor
+                button.layer.borderColor = value.selectBorderColor.cgColor
                 button.setImage(value.selectImage, for: .normal)
                 button.setBackgroundImage(value.selectBackgroudImage, for: .normal)
             } else {
                 button.setTitleColor(value.textColor, for: .normal)
                 button.backgroundColor = value.backgroundColor
-                button.layer.borderColor = value.bothColor.cgColor
+                button.layer.borderColor = value.borderColor.cgColor
                 button.setBackgroundImage(value.backgroudImage, for: .normal)
                 button.setImage(value.image, for: .normal)
             }
@@ -92,6 +93,9 @@ class BFTagsView: UIView {
             // tag action
             button.addTarget(self, action: #selector(itemClick(btn:)), for: .touchUpInside)
             var width = widthForComment(text: value.name, font: style.font, height: style.itemHeight) + value.insets.left + value.insets.right
+            if let image = value.image {
+                width += image.size.width
+            }
             let pWidth = frame.size.width
             if style.column != 0 {
                 // average
@@ -122,13 +126,13 @@ class BFTagsView: UIView {
             if value.is_select {
                 if let _ = value.selectRightBottomIcon {
                     let iconImageView = UIImageView.init(image: value.selectRightBottomIcon)
-                    iconImageView.frame = CGRect.init(x: button.frame.width - value.rightIconSize.width - value.bothWidth, y: button.frame.height - value.rightIconSize.height - value.bothWidth, width: value.rightIconSize.width, height: value.rightIconSize.height)
+                    iconImageView.frame = CGRect.init(x: button.frame.width - value.rightIconSize.width - value.borderWidth, y: button.frame.height - value.rightIconSize.height - value.borderWidth, width: value.rightIconSize.width, height: value.rightIconSize.height)
                     button.addSubview(iconImageView)
                 }
             } else {
                 if let _ = value.rightBottomIcon {
                     let iconImageView = UIImageView.init(image: value.rightBottomIcon)
-                    iconImageView.frame = CGRect.init(x: button.frame.width - value.rightIconSize.width - value.bothWidth, y: button.frame.height - value.rightIconSize.height - value.bothWidth, width: value.rightIconSize.width, height: value.rightIconSize.height)
+                    iconImageView.frame = CGRect.init(x: button.frame.width - value.rightIconSize.width - value.borderWidth, y: button.frame.height - value.rightIconSize.height - value.borderWidth, width: value.rightIconSize.width, height: value.rightIconSize.height)
                     button.addSubview(iconImageView)
                 }
             }

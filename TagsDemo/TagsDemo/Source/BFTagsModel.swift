@@ -15,15 +15,15 @@ class BFTagsModel {
     var is_select: Bool = false
     
     var corners: CGFloat = 5
-    var bothWidth: CGFloat = 0
-    var bothColor: UIColor = UIColor.clear
+    var borderWidth: CGFloat = 0
+    var borderColor: UIColor = UIColor.clear
     var textColor: UIColor = UIColor.white
     var backgroundColor: UIColor = UIColor.orange
     var image: UIImage?
     var backgroudImage: UIImage?
     var rightBottomIcon: UIImage?
 
-    var selectBothColor: UIColor = UIColor.clear
+     var selectBorderColor: UIColor = UIColor.clear
     var selectTextColor: UIColor = UIColor.white
     var selectBackgroundColor: UIColor = UIColor.clear
     var selectImage: UIImage?
